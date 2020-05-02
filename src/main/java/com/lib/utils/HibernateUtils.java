@@ -1,4 +1,4 @@
-package com.lib.entity.utils;
+package com.lib.utils;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -10,6 +10,7 @@ public class HibernateUtils {
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory(){
+
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();

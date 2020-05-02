@@ -1,26 +1,32 @@
 package com.lib.entity;
 
-
 import javax.persistence.*;
 
-@Entity
-@Table(name="LIBRARY")
 
-public class Library{
+@Entity
+@Table(name = "library", schema = "myLibrary")
+public class Library {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column
+    @Basic
+    @Column(name = "name")
     private String name;
 
+    @Basic
+    @Column(name = "address")
+    private String address;
 
-    public Long getId() {
+
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -30,5 +36,13 @@ public class Library{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

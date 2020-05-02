@@ -13,29 +13,26 @@
 
     <session-factory>
 
-        <!-- Database connection settings -->
-        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
-        <property name="connection.url">jdbc:hsqldb:mem:localhost</property>
-        <property name="connection.username">sa</property>
-        <property name="connection.password"/>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/myLibrary?serverTimezone=UTC</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">F[mVflDikVa90,</property>
 
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">1</property>
+        <property name="connection.pool_size">5</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
         <!-- Disable the second-level cache  -->
-        <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory </property>
 
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
 
-        <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create</property>
-
         <mapping class="com.lib.entity.Library"/>
-
+        <mapping class="com.lib.entity.Author"/>
+        <mapping class="com.lib.entity.Book"/>
 
     </session-factory>
 
