@@ -1,12 +1,13 @@
 package com.lib.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
-
-    @Entity
-    @Table(name = "book", schema = "myLibrary")
-    public class Book {
+@Entity
+ @Table(name = "book", schema = "myLibrary")
+     public class Book {
 
         @Id
         @Column(name = "id")
@@ -68,4 +69,27 @@ import javax.persistence.*;
         public void setNumOfPages(int numOfPages) {
             this.numOfPages = numOfPages;
         }
+
+     @ManyToMany(mappedBy = "books")
+     private Set<Author> authors = new HashSet<>();
+
+     public void addAuthor(Author author){
+         authors.add(author);
+         author.getBooks().add(this);
+     }
+
+    public Set<Author> getAuthors() {
+        return authors;
     }
+
+    @Override
+     public String toString() {
+         return "Book{" +
+                 "id=" + id +
+                 ", name='" + name + '\'' +
+                 ", genre='" + genre + '\'' +
+                 ", year=" + year +
+                 ", numOfPages=" + numOfPages +
+                 '}';
+     }
+ }

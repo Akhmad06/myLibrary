@@ -1,6 +1,8 @@
 package com.lib.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "author", schema = "myLibrary")
@@ -16,15 +18,27 @@ public class Author {
     private String name;
 
     @Basic
-    @Column(name = "family")
-    private String family;
+    @Column(name = "secondName")
+    private String secondName;
 
     @Basic
     @Column(name = "year")
     private int year;
 
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "book_to_author",  joinColumns = {@JoinColumn(name = "author_id")},
+            inverseJoinColumns = {@JoinColumn(name = "book_id")})
+    private Set<Book> books = new HashSet<>();
 
+    public void addBook(Book book){
+        books.add(book);
+        book.getAuthors().add(this);
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
 
     public int getId() {
         return id;
@@ -42,12 +56,12 @@ public class Author {
         this.name = name;
     }
 
-    public String getFamily() {
-        return family;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setFamily(String family) {
-        this.family = family;
+    public void setSecondName(String family) {
+        this.secondName = family;
     }
 
     public int getYear() {
@@ -57,4 +71,16 @@ public class Author {
     public void setYear(int year) {
         this.year = year;
     }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", year=" + year +
+                '}';
+    }
+
+
 }
